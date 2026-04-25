@@ -50,7 +50,7 @@ V6. Design mode isolated. Toggle switches between play mode (story execution) an
 | id | status | title | cites |
 |----|--------|-------|-------|
 | T1 | `x` | Design card data struct + story chain format | V1,V3,V4 |
-| T2 | `.` | Build Card widget (question, image, choice buttons layout) | V1,V5 |
+| T2 | `x` | Build Card widget (question, image, choice buttons layout) | V1,V5 |
 | T3 | `.` | Build Thermometer widget (display 0-100, visual bar) | V2 |
 | T4 | `.` | Implement story engine (load story, navigate by choice) | V3,V4 |
 | T5 | `.` | Create example story chain (5-10 cards) | T1,T4 |
