@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(git add *)",
-      "Bash(git commit -m 'T3: Build Thermometer widget \\(display 0-100, visual bar\\) *)"
+      "Bash(git commit -m 'T3: Build Thermometer widget \\(display 0-100, visual bar\\) *)",
+      "Bash(flutter test *)"
     ]
   }
 }
