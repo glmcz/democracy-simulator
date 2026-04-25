@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
 import 'package:democracy_simulator/models/story_chain.dart';
 import 'card_editor.dart';
@@ -84,16 +85,18 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
   }
 
   void _saveChain() {
+    final l10n = AppLocalizations.of(context)!;
+
     if (_cards.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Story chain must have at least 1 card')),
+        SnackBar(content: Text(l10n.storyChainMustHaveCard)),
       );
       return;
     }
 
     if (!_cards.containsKey(_startCardIdController.text)) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Start card ID must exist in cards')),
+        SnackBar(content: Text(l10n.startCardMustExist)),
       );
       return;
     }
@@ -107,7 +110,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
       widget.onSave(chain);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
+        SnackBar(content: Text(l10n.error(e.toString()))),
       );
     }
   }
@@ -115,6 +118,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
   @override
   Widget build(BuildContext context) {
     final isMobile = MediaQuery.of(context).size.width < 600;
+    final l10n = AppLocalizations.of(context)!;
 
     return SingleChildScrollView(
       padding: EdgeInsets.all(16),
@@ -122,14 +126,14 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Story Chain Editor',
+            l10n.storyChainEditor,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 16),
           TextField(
             controller: _chainIdController,
             decoration: InputDecoration(
-              labelText: 'Chain ID',
+              labelText: l10n.chainId,
               border: OutlineInputBorder(),
             ),
           ),
@@ -137,7 +141,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
           TextField(
             controller: _startCardIdController,
             decoration: InputDecoration(
-              labelText: 'Start Card ID',
+              labelText: l10n.startCardId,
               border: OutlineInputBorder(),
             ),
           ),
@@ -146,13 +150,13 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                'Cards (${_cards.length})',
+                l10n.cardsCount(_cards.length),
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               ElevatedButton.icon(
                 onPressed: () => _openCardEditor(),
                 icon: Icon(Icons.add),
-                label: Text('Add Card'),
+                label: Text(l10n.addCard),
                 style: ElevatedButton.styleFrom(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
@@ -172,7 +176,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
                 ? Center(
                     child: Padding(
                       padding: EdgeInsets.all(16),
-                      child: Text('No cards yet. Tap "Add Card" to create one.'),
+                      child: Text(l10n.noCardsYet),
                     ),
                   )
                 : ListView(
@@ -197,7 +201,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
                                 children: [
                                   Icon(Icons.edit, size: 20),
                                   SizedBox(width: 8),
-                                  Text('Edit'),
+                                  Text(l10n.edit),
                                 ],
                               ),
                             ),
@@ -207,7 +211,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
                                 children: [
                                   Icon(Icons.delete, size: 20, color: Colors.red),
                                   SizedBox(width: 8),
-                                  Text('Delete', style: TextStyle(color: Colors.red)),
+                                  Text(l10n.delete, style: TextStyle(color: Colors.red)),
                                 ],
                               ),
                             ),
@@ -226,7 +230,7 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
                 backgroundColor: Colors.green,
                 padding: EdgeInsets.symmetric(vertical: 16),
               ),
-              child: Text('Save Chain'),
+              child: Text(l10n.saveChain),
             ),
           ),
         ],

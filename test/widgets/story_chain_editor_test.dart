@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
 import 'package:democracy_simulator/models/story_chain.dart';
 import 'package:democracy_simulator/widgets/story_chain_editor.dart';
@@ -9,6 +10,8 @@ void main() {
     testWidgets('renders title', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: StoryChainEditor(
               onSave: (_) {},
@@ -23,6 +26,8 @@ void main() {
     testWidgets('displays empty state when no cards', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: StoryChainEditor(
               onSave: (_) {},
@@ -53,6 +58,8 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: StoryChainEditor(
               initialChain: chain,
@@ -70,6 +77,8 @@ void main() {
     testWidgets('displays save button', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: StoryChainEditor(
               onSave: (_) {},
@@ -100,6 +109,8 @@ void main() {
 
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: StoryChainEditor(
               initialChain: chain,

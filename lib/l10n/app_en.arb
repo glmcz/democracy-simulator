@@ -1,0 +1,178 @@
+{
+  "appTitle": "Democracy Simulator",
+  "@appTitle": {
+    "description": "Application title"
+  },
+  "designMode": "Design Mode",
+  "@designMode": {
+    "description": "Label for design mode button/toggle"
+  },
+  "playMode": "Play Mode",
+  "@playMode": {
+    "description": "Label for play mode button/toggle"
+  },
+  "humanOrientation": "Human Orientation",
+  "@humanOrientation": {
+    "description": "Thermometer label showing human orientation scale"
+  },
+  "resetStory": "Reset Story",
+  "@resetStory": {
+    "description": "Tooltip for reset/refresh button"
+  },
+  "errorNoCardFound": "Error: No card found",
+  "@errorNoCardFound": {
+    "description": "Error message when current card is null"
+  },
+  "storyChainSaved": "Story chain saved!",
+  "@storyChainSaved": {
+    "description": "Success message after saving a story chain"
+  },
+  "imageNotFound": "Image not found",
+  "@imageNotFound": {
+    "description": "Fallback text when card image fails to load"
+  },
+  "storyChainEditor": "Story Chain Editor",
+  "@storyChainEditor": {
+    "description": "Title of the story chain editor section"
+  },
+  "chainId": "Chain ID",
+  "@chainId": {
+    "description": "Label for chain ID input field"
+  },
+  "startCardId": "Start Card ID",
+  "@startCardId": {
+    "description": "Label for start card ID input field"
+  },
+  "addCard": "Add Card",
+  "@addCard": {
+    "description": "Button to add a new card to the story chain"
+  },
+  "noCardsYet": "No cards yet. Tap \"Add Card\" to create one.",
+  "@noCardsYet": {
+    "description": "Empty state message when story chain has no cards"
+  },
+  "edit": "Edit",
+  "@edit": {
+    "description": "Menu item to edit a card"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Menu item or button to delete"
+  },
+  "saveChain": "Save Chain",
+  "@saveChain": {
+    "description": "Button to save the story chain"
+  },
+  "storyChainMustHaveCard": "Story chain must have at least 1 card",
+  "@storyChainMustHaveCard": {
+    "description": "Validation error when saving empty story chain"
+  },
+  "startCardMustExist": "Start card ID must exist in cards",
+  "@startCardMustExist": {
+    "description": "Validation error when start card ID doesn't match any card"
+  },
+  "storyChains": "Story Chains",
+  "@storyChains": {
+    "description": "Heading for the story chains selector section"
+  },
+  "noStoryChainsYet": "No story chains yet",
+  "@noStoryChainsYet": {
+    "description": "Empty state message when no story chains exist"
+  },
+  "newChain": "New Chain",
+  "@newChain": {
+    "description": "Button to create a new story chain"
+  },
+  "newStoryChain": "New Story Chain",
+  "@newStoryChain": {
+    "description": "Dialog title for creating a new story chain"
+  },
+  "chainIdHint": "e.g., story_2, refugee_crisis_2",
+  "@chainIdHint": {
+    "description": "Hint text for chain ID input field"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Button to cancel a dialog or action"
+  },
+  "create": "Create",
+  "@create": {
+    "description": "Button to create new item"
+  },
+  "deleteStoryChain": "Delete Story Chain?",
+  "@deleteStoryChain": {
+    "description": "Dialog title for deleting a story chain"
+  },
+  "editCard": "Edit Card",
+  "@editCard": {
+    "description": "Title of the card editor section"
+  },
+  "cardId": "Card ID",
+  "@cardId": {
+    "description": "Label for card ID input field"
+  },
+  "question": "Question",
+  "@question": {
+    "description": "Label for card question input field"
+  },
+  "imagePath": "Image Path",
+  "@imagePath": {
+    "description": "Label for card image path input field"
+  },
+  "choices24": "Choices (2-4)",
+  "@choices24": {
+    "description": "Section heading for card choices"
+  },
+  "addChoice": "Add Choice",
+  "@addChoice": {
+    "description": "Button to add a choice to a card"
+  },
+  "saveCard": "Save Card",
+  "@saveCard": {
+    "description": "Button to save a card"
+  },
+  "cardMustHave24Choices": "Card must have 2-4 choices",
+  "@cardMustHave24Choices": {
+    "description": "Validation error when card has wrong number of choices"
+  },
+  "choiceText": "Choice Text",
+  "@choiceText": {
+    "description": "Label for choice text input field"
+  },
+  "thermometerDelta": "Thermometer Delta (-100 to +100)",
+  "@thermometerDelta": {
+    "description": "Label for thermometer delta input field"
+  },
+  "nextCardId": "Next Card ID",
+  "@nextCardId": {
+    "description": "Label for next card ID input field"
+  },
+  "cardsCount": "Cards ({count})",
+  "@cardsCount": {
+    "description": "Section heading showing number of cards",
+    "placeholders": {
+      "count": {
+        "type": "int",
+        "format": "compact"
+      }
+    }
+  },
+  "deleteChainConfirm": "Delete \"{chainId}\"? This cannot be undone.",
+  "@deleteChainConfirm": {
+    "description": "Confirmation dialog body for deleting a story chain",
+    "placeholders": {
+      "chainId": {
+        "type": "String"
+      }
+    }
+  },
+  "error": "Error: {error}",
+  "@error": {
+    "description": "Generic error message",
+    "placeholders": {
+      "error": {
+        "type": "String"
+      }
+    }
+  }
+}

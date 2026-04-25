@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
 
 class CardEditor extends StatefulWidget {
@@ -84,9 +85,11 @@ class _CardEditorState extends State<CardEditor> {
             ))
         .toList();
 
+    final l10n = AppLocalizations.of(context)!;
+
     if (choices.length < 2 || choices.length > 4) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Card must have 2-4 choices')),
+        SnackBar(content: Text(l10n.cardMustHave24Choices)),
       );
       return;
     }
@@ -101,41 +104,42 @@ class _CardEditorState extends State<CardEditor> {
       widget.onSave(card);
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Error: $e')),
+        SnackBar(content: Text(l10n.error(e.toString()))),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       padding: EdgeInsets.all(16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Edit Card',
+            l10n.editCard,
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           SizedBox(height: 16),
           TextField(
             controller: _idController,
-            decoration: InputDecoration(labelText: 'Card ID'),
+            decoration: InputDecoration(labelText: l10n.cardId),
           ),
           SizedBox(height: 12),
           TextField(
             controller: _questionController,
-            decoration: InputDecoration(labelText: 'Question'),
+            decoration: InputDecoration(labelText: l10n.question),
             maxLines: 3,
           ),
           SizedBox(height: 12),
           TextField(
             controller: _imagePathController,
-            decoration: InputDecoration(labelText: 'Image Path'),
+            decoration: InputDecoration(labelText: l10n.imagePath),
           ),
           SizedBox(height: 24),
           Text(
-            'Choices (2-4)',
+            l10n.choices24,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           SizedBox(height: 12),
@@ -153,7 +157,7 @@ class _CardEditorState extends State<CardEditor> {
               child: ElevatedButton.icon(
                 onPressed: _addChoice,
                 icon: Icon(Icons.add),
-                label: Text('Add Choice'),
+                label: Text(l10n.addChoice),
               ),
             ),
           SizedBox(height: 24),
@@ -166,7 +170,7 @@ class _CardEditorState extends State<CardEditor> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.grey,
                   ),
-                  child: Text('Cancel'),
+                  child: Text(l10n.cancel),
                 ),
               SizedBox(width: 12),
               ElevatedButton(
@@ -174,7 +178,7 @@ class _CardEditorState extends State<CardEditor> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,
                 ),
-                child: Text('Save Card'),
+                child: Text(l10n.saveCard),
               ),
             ],
           ),
@@ -244,6 +248,7 @@ class _ChoiceEditorWidgetState extends State<_ChoiceEditor> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Container(
       margin: EdgeInsets.only(bottom: 16),
       padding: EdgeInsets.all(12),
@@ -257,7 +262,7 @@ class _ChoiceEditorWidgetState extends State<_ChoiceEditor> {
           TextField(
             controller: _textController,
             decoration: InputDecoration(
-              labelText: 'Choice Text',
+              labelText: l10n.choiceText,
               isDense: true,
             ),
           ),
@@ -268,7 +273,7 @@ class _ChoiceEditorWidgetState extends State<_ChoiceEditor> {
                 child: TextField(
                   controller: _deltaController,
                   decoration: InputDecoration(
-                    labelText: 'Thermometer Delta (-100 to +100)',
+                    labelText: l10n.thermometerDelta,
                     isDense: true,
                   ),
                   keyboardType: TextInputType.number,
@@ -286,7 +291,7 @@ class _ChoiceEditorWidgetState extends State<_ChoiceEditor> {
           TextField(
             controller: _nextCardIdController,
             decoration: InputDecoration(
-              labelText: 'Next Card ID',
+              labelText: l10n.nextCardId,
               isDense: true,
             ),
           ),

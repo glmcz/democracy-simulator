@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/widgets/thermometer.dart';
 
 void main() {
@@ -7,6 +8,8 @@ void main() {
     testWidgets('displays value 0-100', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 50),
           ),
@@ -19,6 +22,8 @@ void main() {
     testWidgets('clamps value out of range', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 75),
           ),
@@ -31,6 +36,8 @@ void main() {
     testWidgets('renders progress bar', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 50),
           ),
@@ -55,6 +62,8 @@ void main() {
     testWidgets('displays custom label', (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 50, label: 'Test Label'),
           ),
@@ -68,6 +77,8 @@ void main() {
       // Blue: < 25
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 10),
           ),
@@ -80,6 +91,8 @@ void main() {
       // Orange: 50-75
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 60),
           ),
@@ -93,6 +106,8 @@ void main() {
       // Red: >= 75
       await tester.pumpWidget(
         MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
           home: Scaffold(
             body: Thermometer(value: 90),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/services/design_mode.dart';
 
 class DesignModeToggle extends StatefulWidget {
@@ -34,13 +35,14 @@ class _DesignModeToggleState extends State<DesignModeToggle> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return ElevatedButton.icon(
       onPressed: _toggleMode,
       icon: Icon(
         _currentMode == AppMode.play ? Icons.gamepad : Icons.edit,
       ),
       label: Text(
-        _currentMode == AppMode.play ? 'Play Mode' : 'Design Mode',
+        _currentMode == AppMode.play ? l10n.playMode : l10n.designMode,
       ),
       style: ElevatedButton.styleFrom(
         backgroundColor: _currentMode == AppMode.play ? Colors.green : Colors.orange,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
 import 'choice_button.dart';
 
@@ -42,7 +43,7 @@ class CardWidget extends StatelessWidget {
                 return Container(
                   color: Colors.grey[300],
                   child: Center(
-                    child: Text('Image not found'),
+                    child: Text(AppLocalizations.of(context)!.imageNotFound),
                   ),
                 );
               },
