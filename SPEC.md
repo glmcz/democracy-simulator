@@ -58,7 +58,7 @@ V6. Design mode isolated. Toggle switches between play mode (story execution) an
 | T7 | `x` | Test thermometer accumulation (verify delta stacking) | V2 |
 | T8 | `x` | Build design mode toggle (button to switch play ↔ design) | V6 |
 | T9 | `x` | Build card editor UI (form: question, image, choices, deltas) | V1,V5 |
-| T10 | `.` | Build story chain graph editor (add cards, link choices) | V1,V3 |
+| T10 | `x` | Build story chain graph editor (add cards, link choices) | V1,V3 |
 | T11 | `.` | Implement file persistence (save edited cards to data source) | V4,V6 |
 | T12 | `.` | Test design mode: create new story chain end-to-end | T8,T10,T11 |
 
