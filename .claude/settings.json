@@ -5,7 +5,8 @@
       "Bash(git commit -m 'T3: Build Thermometer widget \\(display 0-100, visual bar\\) *)",
       "Bash(flutter test *)",
       "Bash(git commit -m 'T10: Build story chain graph editor \\(add cards, link choices\\) *)",
-      "Bash(git commit -m 'T11: Implement file persistence \\(save edited cards to data source\\) *)"
+      "Bash(git commit -m 'T11: Implement file persistence \\(save edited cards to data source\\) *)",
+      "Bash(git commit -m 'Mobile/Android optimization: responsive layouts, touch targets, modal editors *)"
     ]
   }
 }

@@ -22,6 +22,7 @@ class Thermometer extends StatelessWidget {
     final clampedValue = value.clamp(0, 100);
     final percentage = clampedValue / 100.0;
     final barColor = _getColor(clampedValue);
+    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,7 +39,7 @@ class Thermometer extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
                 child: LinearProgressIndicator(
                   value: percentage,
-                  minHeight: 24,
+                  minHeight: isMobile ? 20 : 24,
                   backgroundColor: Colors.grey[300],
                   valueColor: AlwaysStoppedAnimation<Color>(barColor),
                 ),
@@ -46,11 +47,12 @@ class Thermometer extends StatelessWidget {
             ),
             SizedBox(width: 12),
             SizedBox(
-              width: 45,
+              width: 50,
               child: Text(
                 '$clampedValue',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   fontWeight: FontWeight.bold,
+                  fontSize: isMobile ? 14 : 16,
                 ),
                 textAlign: TextAlign.right,
               ),

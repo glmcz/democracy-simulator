@@ -31,7 +31,7 @@ void main() {
         ),
       );
 
-      expect(find.text('No cards yet'), findsOneWidget);
+      expect(find.text('No cards yet. Tap "Add Card" to create one.'), findsOneWidget);
     });
 
     testWidgets('populates from initial chain', (WidgetTester tester) async {

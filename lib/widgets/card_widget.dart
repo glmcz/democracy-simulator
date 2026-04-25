@@ -14,22 +14,27 @@ class CardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isMobile = MediaQuery.of(context).size.width < 600;
+    final padding = isMobile ? 16.0 : 24.0;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Question at top
         Padding(
-          padding: EdgeInsets.all(24),
+          padding: EdgeInsets.symmetric(horizontal: padding, vertical: padding),
           child: Text(
             card.question,
-            style: Theme.of(context).textTheme.headlineSmall,
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+              fontSize: isMobile ? 18 : 24,
+            ),
             textAlign: TextAlign.center,
           ),
         ),
         // Image in center
         Expanded(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+            padding: EdgeInsets.symmetric(horizontal: padding),
             child: Image.asset(
               card.imagePath,
               fit: BoxFit.contain,
@@ -46,21 +51,20 @@ class CardWidget extends StatelessWidget {
         ),
         // Choices at bottom
         Padding(
-          padding: EdgeInsets.all(24),
-          child: Wrap(
-            spacing: 12,
-            runSpacing: 12,
-            alignment: WrapAlignment.center,
+          padding: EdgeInsets.all(padding),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
             children: [
               for (int i = 0; i < card.choices.length; i++)
-                SizedBox(
-                  width: MediaQuery.of(context).size.width > 600
-                      ? (MediaQuery.of(context).size.width - 60) / card.choices.length
-                      : 150,
-                  child: ChoiceButton(
-                    text: card.choices[i].text,
-                    index: i,
-                    onTap: () => onChoiceSelected(i),
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: isMobile ? 6 : 8),
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: ChoiceButton(
+                      text: card.choices[i].text,
+                      index: i,
+                      onTap: () => onChoiceSelected(i),
+                    ),
                   ),
                 ),
             ],

@@ -52,6 +52,9 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
       _cards[card.id] = card;
       _selectedCardId = card.id;
     });
+    if (mounted) {
+      Navigator.of(context).pop();
+    }
   }
 
   void _deleteCard(String cardId) {
@@ -61,6 +64,23 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
         _selectedCardId = _cards.isNotEmpty ? _cards.keys.first : null;
       }
     });
+  }
+
+  void _openCardEditor({card_model.Card? card}) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (context) => SingleChildScrollView(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: CardEditor(
+          initialCard: card,
+          onSave: _addCard,
+          onCancel: () => Navigator.pop(context),
+        ),
+      ),
+    );
   }
 
   void _saveChain() {
@@ -94,101 +114,123 @@ class _StoryChainEditorState extends State<StoryChainEditor> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        // Left: Story metadata + card list
-        Expanded(
-          flex: 1,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Story Chain Editor',
-                  style: Theme.of(context).textTheme.headlineSmall,
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
+    return SingleChildScrollView(
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Story Chain Editor',
+            style: Theme.of(context).textTheme.headlineSmall,
+          ),
+          SizedBox(height: 16),
+          TextField(
+            controller: _chainIdController,
+            decoration: InputDecoration(
+              labelText: 'Chain ID',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          SizedBox(height: 12),
+          TextField(
+            controller: _startCardIdController,
+            decoration: InputDecoration(
+              labelText: 'Start Card ID',
+              border: OutlineInputBorder(),
+            ),
+          ),
+          SizedBox(height: 24),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Cards (${_cards.length})',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              ElevatedButton.icon(
+                onPressed: () => _openCardEditor(),
+                icon: Icon(Icons.add),
+                label: Text('Add Card'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 ),
-                SizedBox(height: 16),
-                TextField(
-                  controller: _chainIdController,
-                  decoration: InputDecoration(labelText: 'Chain ID'),
-                ),
-                SizedBox(height: 12),
-                TextField(
-                  controller: _startCardIdController,
-                  decoration: InputDecoration(labelText: 'Start Card ID'),
-                ),
-                SizedBox(height: 24),
-                Text(
-                  'Cards (${_cards.length})',
-                  style: Theme.of(context).textTheme.titleMedium,
-                ),
-                SizedBox(height: 12),
-                Container(
-                  constraints: BoxConstraints(maxHeight: 300),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey[300]!),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: _cards.isEmpty
-                      ? Center(
-                          child: Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Text('No cards yet'),
-                          ),
-                        )
-                      : ListView(
-                          children: _cards.entries.map((entry) {
-                            return ListTile(
-                              title: Text(entry.value.id),
-                              subtitle: Text(entry.value.question),
-                              selected:
-                                  _selectedCardId == entry.value.id,
-                              onTap: () => setState(
-                                () => _selectedCardId = entry.value.id,
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.delete, color: Colors.red),
-                                onPressed: () => _deleteCard(entry.value.id),
-                              ),
-                            );
-                          }).toList(),
-                        ),
-                ),
-                SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      onPressed: _saveChain,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.green,
-                      ),
-                      child: Text('Save Chain'),
+              ),
+            ],
+          ),
+          SizedBox(height: 12),
+          Container(
+            constraints: BoxConstraints(
+              maxHeight: isMobile ? 300 : 400,
+            ),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[300]!),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: _cards.isEmpty
+                ? Center(
+                    child: Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text('No cards yet. Tap "Add Card" to create one.'),
                     ),
-                  ],
-                ),
-              ],
+                  )
+                : ListView(
+                    children: _cards.entries.map((entry) {
+                      return ListTile(
+                        title: Text(entry.value.id),
+                        subtitle: Text(
+                          entry.value.question,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        selected: _selectedCardId == entry.value.id,
+                        onTap: () {
+                          setState(() => _selectedCardId = entry.value.id);
+                          _openCardEditor(card: entry.value);
+                        },
+                        trailing: PopupMenuButton(
+                          itemBuilder: (context) => [
+                            PopupMenuItem(
+                              onTap: () => _openCardEditor(card: entry.value),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit, size: 20),
+                                  SizedBox(width: 8),
+                                  Text('Edit'),
+                                ],
+                              ),
+                            ),
+                            PopupMenuItem(
+                              onTap: () => _deleteCard(entry.value.id),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.delete, size: 20, color: Colors.red),
+                                  SizedBox(width: 8),
+                                  Text('Delete', style: TextStyle(color: Colors.red)),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+          ),
+          SizedBox(height: 24),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              onPressed: _saveChain,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green,
+                padding: EdgeInsets.symmetric(vertical: 16),
+              ),
+              child: Text('Save Chain'),
             ),
           ),
-        ),
-        // Right: Card editor for selected card
-        if (_selectedCardId != null)
-          Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border(
-                  left: BorderSide(color: Colors.grey[300]!, width: 1),
-                ),
-              ),
-              child: CardEditor(
-                initialCard: _cards[_selectedCardId],
-                onSave: _addCard,
-              ),
-            ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }
