@@ -53,7 +53,7 @@ V6. Design mode isolated. Toggle switches between play mode (story execution) an
 | T2 | `x` | Build Card widget (question, image, choice buttons layout) | V1,V5 |
 | T3 | `x` | Build Thermometer widget (display 0-100, visual bar) | V2 |
 | T4 | `x` | Implement story engine (load story, navigate by choice) | V3,V4 |
-| T5 | `.` | Create example story chain (5-10 cards) | T1,T4 |
+| T5 | `x` | Create example story chain (5-10 cards) | T1,T4 |
 | T6 | `.` | Test choice routing (verify next_card_id logic) | V3 |
 | T7 | `.` | Test thermometer accumulation (verify delta stacking) | V2 |
 | T8 | `.` | Build design mode toggle (button to switch play ↔ design) | V6 |
