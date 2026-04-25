@@ -60,7 +60,7 @@ V6. Design mode isolated. Toggle switches between play mode (story execution) an
 | T9 | `x` | Build card editor UI (form: question, image, choices, deltas) | V1,V5 |
 | T10 | `x` | Build story chain graph editor (add cards, link choices) | V1,V3 |
 | T11 | `x` | Implement file persistence (save edited cards to data source) | V4,V6 |
-| T12 | `.` | Test design mode: create new story chain end-to-end | T8,T10,T11 |
+| T12 | `x` | Test design mode: create new story chain end-to-end | T8,T10,T11 |
 
 ## §B Bug Log
 
