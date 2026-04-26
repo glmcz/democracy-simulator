@@ -49,3 +49,5 @@ whatsnew
 macos/*
 macos
 release.jks
+*.jks
+release.jks.b64

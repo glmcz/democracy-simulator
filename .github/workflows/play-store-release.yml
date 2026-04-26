@@ -89,6 +89,11 @@ jobs:
       - name: Get dependencies
         run: flutter pub get
 
+      - name: Decode keystore from base64
+        run: |
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
+          ls -lh release.jks
+
       - name: Build AAB
         run: |
           flutter build appbundle \
