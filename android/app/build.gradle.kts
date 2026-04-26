@@ -35,7 +35,6 @@ android {
             storeFile = file("../../release.jks")
             storePassword = System.getenv("KEYSTORE_PASSWORD") ?: throw GradleException("KEYSTORE_PASSWORD not set")
             keyAlias = System.getenv("KEY_ALIAS") ?: throw GradleException("KEY_ALIAS not set")
-            keyPassword = System.getenv("KEY_PASSWORD") ?: throw GradleException("KEY_PASSWORD not set")
         }
     }
 
