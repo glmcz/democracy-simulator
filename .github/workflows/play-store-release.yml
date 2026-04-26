@@ -92,7 +92,7 @@ jobs:
 
       - name: Decode keystore from base64
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > release.jks
+          echo "${{ secrets.KEYSTORE_BASE64 }}" | tr -d ' \n' | base64 -d > release.jks
           ls -lh release.jks
 
       - name: Build AAB
@@ -104,7 +104,6 @@ jobs:
         env:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
       - name: Upload to Play Store
         uses: r0adkll/upload-google-play@v1

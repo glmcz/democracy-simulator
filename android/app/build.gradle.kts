@@ -33,9 +33,9 @@ android {
     signingConfigs {
         create("release") {
             storeFile = file("../../release.jks")
-            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "godslove"
-            keyAlias = System.getenv("KEY_ALIAS") ?: "release-key"
-            keyPassword = System.getenv("KEY_PASSWORD") ?: "godslove"
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: throw GradleException("KEYSTORE_PASSWORD not set")
+            keyAlias = System.getenv("KEY_ALIAS") ?: throw GradleException("KEY_ALIAS not set")
+            keyPassword = System.getenv("KEY_PASSWORD") ?: throw GradleException("KEY_PASSWORD not set")
         }
     }
 
