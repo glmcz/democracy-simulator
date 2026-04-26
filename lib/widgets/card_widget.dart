@@ -1,6 +1,8 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
+import 'package:democracy_simulator/utils/image_opener.dart';
 import 'choice_button.dart';
 
 class CardWidget extends StatelessWidget {
@@ -12,6 +14,54 @@ class CardWidget extends StatelessWidget {
     required this.card,
     required this.onChoiceSelected,
   });
+
+  Widget _buildImage(String imagePath) {
+    if (imagePath.startsWith('assets/')) {
+      return Image.asset(
+        imagePath,
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: Colors.grey[300],
+            child: Center(
+              child: Text(AppLocalizations.of(context)!.imageNotFound),
+            ),
+          );
+        },
+      );
+    } else {
+      return Image.file(
+        File(imagePath),
+        fit: BoxFit.contain,
+        errorBuilder: (context, error, stackTrace) {
+          return Container(
+            color: Colors.grey[300],
+            child: Center(
+              child: Text(AppLocalizations.of(context)!.imageNotFound),
+            ),
+          );
+        },
+      );
+    }
+  }
+
+  Future<void> _openImage(BuildContext context, String imagePath) async {
+    if (imagePath.startsWith('assets/')) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(AppLocalizations.of(context)!.imageNotFound)),
+      );
+      return;
+    }
+    try {
+      await ImageOpener.openImage(imagePath);
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error opening image: $e')),
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,17 +86,9 @@ class CardWidget extends StatelessWidget {
         Expanded(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: padding),
-            child: Image.asset(
-              card.imagePath,
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: Center(
-                    child: Text(AppLocalizations.of(context)!.imageNotFound),
-                  ),
-                );
-              },
+            child: GestureDetector(
+              onTap: () => _openImage(context, card.imagePath),
+              child: _buildImage(card.imagePath),
             ),
           ),
         ),

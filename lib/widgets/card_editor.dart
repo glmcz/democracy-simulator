@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:democracy_simulator/generated_l10n/app_localizations.dart';
 import 'package:democracy_simulator/models/card.dart' as card_model;
+import 'package:image_picker/image_picker.dart';
 
 class CardEditor extends StatefulWidget {
   final card_model.Card? initialCard;
@@ -75,6 +76,30 @@ class _CardEditorState extends State<CardEditor> {
     }
   }
 
+  Future<void> _pickImage() async {
+    try {
+      final ImagePicker picker = ImagePicker();
+      final XFile? image = await picker.pickImage(source: ImageSource.gallery);
+
+      if (!mounted) return;
+
+      if (image != null && image.path.isNotEmpty) {
+        setState(() {
+          _imagePathController.text = image.path.trim();
+        });
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Image selected: ${image.path}')),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error picking image: $e')),
+        );
+      }
+    }
+  }
+
   void _saveCard() {
     final choices = _choices
         .where((c) => c.text.isNotEmpty && c.nextCardId.isNotEmpty)
@@ -135,7 +160,14 @@ class _CardEditorState extends State<CardEditor> {
           SizedBox(height: 12),
           TextField(
             controller: _imagePathController,
-            decoration: InputDecoration(labelText: l10n.imagePath),
+            decoration: InputDecoration(
+              labelText: l10n.imagePath,
+              suffixIcon: IconButton(
+                icon: const Icon(Icons.image),
+                onPressed: _pickImage,
+                tooltip: 'Select image',
+              ),
+            ),
           ),
           SizedBox(height: 24),
           Text(

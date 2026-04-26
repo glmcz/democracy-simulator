@@ -132,7 +132,7 @@ class _GameScreenState extends State<GameScreen> {
                       style: const TextStyle(fontSize: 20),
                     ),
                     onPressed: widget.onLocaleChanged,
-                    tooltip: l10n.playMode,
+                    tooltip: 'Toggle language',
                   ),
                   DesignModeToggle(
                     manager: designModeManager,
@@ -165,7 +165,7 @@ class _GameScreenState extends State<GameScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(l10n.appTitle),
+        title: Text(l10n.playMode),
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -177,7 +177,7 @@ class _GameScreenState extends State<GameScreen> {
                     style: const TextStyle(fontSize: 20),
                   ),
                   onPressed: widget.onLocaleChanged,
-                  tooltip: l10n.designMode,
+                  tooltip: 'Toggle language',
                 ),
                 DesignModeToggle(
                   manager: designModeManager,

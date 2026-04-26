@@ -39,13 +39,13 @@ class _DesignModeToggleState extends State<DesignModeToggle> {
     return ElevatedButton.icon(
       onPressed: _toggleMode,
       icon: Icon(
-        _currentMode == AppMode.play ? Icons.gamepad : Icons.edit,
+        _currentMode == AppMode.play ? Icons.edit : Icons.gamepad,
       ),
       label: Text(
-        _currentMode == AppMode.play ? l10n.playMode : l10n.designMode,
+        _currentMode == AppMode.play ? l10n.designMode : l10n.playMode,
       ),
       style: ElevatedButton.styleFrom(
-        backgroundColor: _currentMode == AppMode.play ? Colors.green : Colors.orange,
+        backgroundColor: _currentMode == AppMode.play ?  Colors.orange : Colors.green,
         foregroundColor: Colors.white,
       ),
     );

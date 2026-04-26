@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.democracy_simulator"
+    namespace = "com.godslove.democracy_simulator"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -16,25 +16,32 @@ android {
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_17.toString()
+        jvmTarget = "17"
     }
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.example.democracy_simulator"
+        applicationId = "com.godslove.democracy_simulator"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
-        minSdk = flutter.minSdkVersion
+        minSdk = 24
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            storeFile = file("../../release.jks")
+            storePassword = System.getenv("KEYSTORE_PASSWORD") ?: "godslove"
+            keyAlias = System.getenv("KEY_ALIAS") ?: "release-key"
+            keyPassword = System.getenv("KEY_PASSWORD") ?: "godslove"
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig = signingConfigs.getByName("release")
         }
     }
 }
